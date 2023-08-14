@@ -89,8 +89,8 @@ export function DataTable<TData, TValue>({
         />
 
         {/* Column Visibility */}
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-4">
               Columns
             </Button>
@@ -114,7 +114,7 @@ export function DataTable<TData, TValue>({
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu> */}
+        </DropdownMenu>
       </div>
 
       {/* Table */}
