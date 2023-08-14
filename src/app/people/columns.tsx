@@ -11,11 +11,23 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
 export const columns: ColumnDef<People>[] = [
   {
-    header: 'Person ID',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={'ghost'}
+          onClick={() => {
+            column.toggleSorting(column.getIsSorted() === 'asc');
+          }}
+        >
+          Person ID
+          <ArrowUpDown className="h-4 w-4 ml-2" />
+        </Button>
+      );
+    },
     accessorKey: 'id',
   },
   {
