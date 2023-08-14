@@ -2,9 +2,11 @@
 
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -20,6 +22,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { Input } from '@/components/ui/input';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +34,7 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
@@ -41,15 +45,33 @@ export function DataTable<TData, TValue>({
     //* Sorting 추가
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
+    //* ColumnFilters 추가
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnFiltersChange: setColumnFilters,
 
     //* State 추가
     state: {
       sorting,
+      columnFilters,
     },
   });
 
   return (
     <div>
+      {/* Filter Input */}
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter First names"
+          value={
+            (table.getColumn('first_name')?.getFilterValue() as string) || ''
+          }
+          onChange={(e) => {
+            table.getColumn('first_name')?.setFilterValue(e.target.value);
+          }}
+          className="max-w-sm"
+        />
+      </div>
+
       {/* Table */}
       <div className="rounded-md border">
         <Table>
