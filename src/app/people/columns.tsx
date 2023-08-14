@@ -12,8 +12,35 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export const columns: ColumnDef<People>[] = [
+  {
+    id: 'select',
+    header: ({ table }) => {
+      return (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => {
+            table.toggleAllPageRowsSelected(!!value);
+          }}
+        />
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => {
+            row.toggleSelected(!!value);
+          }}
+        />
+      );
+    },
+
+    enableSorting: false, //? checkbox는 sorting이 필요없으므로 false
+    enableHiding: false, //? columnVisibility를 사용하지 않으므로 false
+  },
   {
     header: ({ column }) => {
       return (

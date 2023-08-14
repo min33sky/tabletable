@@ -43,6 +43,9 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+
+  console.log('rowSelection: ', rowSelection);
 
   const table = useReactTable({
     data,
@@ -58,12 +61,15 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     //* ColumnVisibility 추가
     onColumnVisibilityChange: setColumnVisibility,
+    //* RowSelection 추가
+    onRowSelectionChange: setRowSelection,
 
     //* State 추가
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   });
 
@@ -83,7 +89,7 @@ export function DataTable<TData, TValue>({
         />
 
         {/* Column Visibility */}
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger>
             <Button variant="outline" className="ml-4">
               Columns
@@ -108,7 +114,7 @@ export function DataTable<TData, TValue>({
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
 
       {/* Table */}
@@ -181,6 +187,11 @@ export function DataTable<TData, TValue>({
         >
           다음
         </Button>
+      </div>
+
+      <div className="flex-1 text-sm text-muted-foreground">
+        {table.getFilteredSelectedRowModel().rows.length} of{' '}
+        {table.getFilteredRowModel().rows.length} row(s) selected
       </div>
     </div>
   );
