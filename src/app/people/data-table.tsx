@@ -31,6 +31,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { downloadToExcel } from '@/lib/xlsx';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -89,8 +90,13 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
 
+        {/* Export to Excel */}
+        <Button onClick={() => downloadToExcel()} className="ml-4">
+          Excel로 내보내기
+        </Button>
+
         {/* Theme Selector */}
-        <ThemeToggle />
+        <ThemeToggle className="ml-4" />
 
         {/* Column Visibility */}
         <DropdownMenu>
