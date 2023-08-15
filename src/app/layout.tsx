@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 import type { Metadata } from 'next';
 
@@ -12,8 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body className="">{children}</body>
+    <html lang="ko" suppressHydrationWarning>
+      <body className="">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -30,6 +30,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -87,6 +88,9 @@ export function DataTable<TData, TValue>({
           }}
           className="max-w-sm"
         />
+
+        {/* Theme Selector */}
+        <ThemeToggle />
 
         {/* Column Visibility */}
         <DropdownMenu>

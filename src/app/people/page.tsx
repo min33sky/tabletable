@@ -4,5 +4,9 @@ import { columns } from './columns';
 import { people } from '../data/people';
 
 export default function PeoplePage() {
-  return <DataTable columns={columns} data={people} />;
+  return (
+    <div className="container py-10 mx-auto">
+      <DataTable columns={columns} data={people} />
+    </div>
+  );
 }
